@@ -1,0 +1,125 @@
+"""
+    Extends RegonAPI with operations
+"""
+from RegonAPI.parsers import parse_xml_response
+from RegonAPI.settings import REPORTS
+from RegonAPI.exceptions import ApiUnknownReportNameError
+
+
+class RegonAPIOperations(object):
+    def searchData(self, krs=None, regon=None, nip=None, regons9=None,
+                   regons14=None, krss=None, nips=None):
+        """Search data (DaneSzukaj wrapper)
+
+        Parameters
+        ----------
+        krs : str
+            KRS number
+        regon : str
+            REGON9 or REGON14
+        nip : str
+            NIP number
+        regons9 : list
+            List of REGON9 numbers
+        regons14 : list
+            List of REGON14 numbers
+        krss : list
+            List of KRS numbers
+        nips : list
+            List of NIP numbers
+
+        Returns
+        -------
+        None
+            If not found any results for provided parameters
+        list
+            List of results
+
+        Raises
+        ------
+        Exception
+            If no parameters provided
+        TypeError
+            If at least one parameter is provided with incorrect type
+        """
+        # Validate parameters
+        str_params = [krs, regon, nip]
+        list_params = [regons9, regons14, krss, nips]
+        if not any(str_params) and not any(list_params):
+            raise Exception("provide at least one parameter")
+
+        if krs is not None and not isinstance(krs, str):
+            raise TypeError("krs - invalid (str required)")
+        if regon is not None and not isinstance(regon, str):
+            raise TypeError("regon - invalid (str required)")
+        if nip is not None and not isinstance(nip, str):
+            raise TypeError("nip - invalid (str required)")
+
+        if regons9 is not None and not isinstance(regons9, list):
+            raise TypeError("regons9 - invalid (list required)")
+        if regons14 is not None and not isinstance(regons14, list):
+            raise TypeError("regons14 - invalid (list required)")
+        if krss is not None and not isinstance(krss, list):
+            raise TypeError("krss - invalid (list required)")
+        if nips is not None and not isinstance(nips, list):
+            raise TypeError("nips - invalid (list required)")
+        # Validate parameters - End
+
+        # join lists
+        regons9 = ",".join(regons9) if regons9 else None
+        regons14 = ",".join(regons14) if regons14 else None
+        krss = ",".join(krss) if krss else None
+        nips = ",".join(nips) if nips else None
+        # join lists - End
+
+        search_param = "pParametryWyszukiwania"
+        request_data = {search_param: {}}
+        map_ = {
+            "krs": "Krs",
+            "regon": "Regon",
+            "nip": "Nip",
+            "regons9": "Regony9zn",
+            "regons14": "Regony14zn",
+            "krss": "Krsy",
+            "nips": "Nipy"
+        }
+        for k, v in locals().items():
+            if k in map_.keys():
+                if v is not None:
+                    request_data[search_param][map_[k]] = v
+        response = self.service.DaneSzukaj(**request_data)
+        return parse_xml_response(response) if response else None
+
+    def dataDownloadFullReport(self, regon, report_name, strict=True):
+        """Search data (DaneSzukaj wrapper)
+
+        Parameters
+        ----------
+        regon : str
+            REGON9 or REGON14
+        report_name : str
+            report name
+        strict : bool
+            If True checks if report_name is valid (default: True)
+
+        Returns
+        -------
+        None
+            If not found any results for provided parameters
+        list
+            List of results
+
+        Raises
+        ------
+        ApiUnknownReportNameError
+            If strict=True and provided report name is not included in
+            predefined list of valid report names
+        """
+        if strict is True and report_name not in REPORTS:
+            raise ApiUnknownReportNameError(report_name)
+        request_data = {
+            "pRegon": regon,
+            "pNazwaRaportu": report_name
+        }
+        response = self.service.DanePobierzPelnyRaport(**request_data)
+        return parse_xml_response(response) if response else None
