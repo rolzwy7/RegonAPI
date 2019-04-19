@@ -24,10 +24,10 @@ def test_regon_api_auth__test_prerequisites():
 # -------------------------------------------------
 # authenticate - Method
 # -------------------------------------------------
-@mock.patch('RegonAPI.Client')
-@mock.patch('RegonAPI.Session')
-@mock.patch('RegonAPI.RegonAPI._check_session')
-@mock.patch('RegonAPI.RegonAPI._create_service')
+@mock.patch('RegonAPI.regon_api.Client')
+@mock.patch('RegonAPI.regon_api.Session')
+@mock.patch('RegonAPI.regon_api.RegonAPI._check_session')
+@mock.patch('RegonAPI.regon_api.RegonAPI._create_service')
 def test_regon_api_auth_success(
     mocked_create_service, mocked_check_session,
     mocked_Session, mocked_Client, api_mock
@@ -53,10 +53,10 @@ def test_regon_api_auth_success(
     assert returned == testing.SID
 
 
-@mock.patch('RegonAPI.Client')
-@mock.patch('RegonAPI.Session')
-@mock.patch('RegonAPI.RegonAPI._check_session')
-@mock.patch('RegonAPI.RegonAPI._create_service')
+@mock.patch('RegonAPI.regon_api.Client')
+@mock.patch('RegonAPI.regon_api.Session')
+@mock.patch('RegonAPI.regon_api.RegonAPI._check_session')
+@mock.patch('RegonAPI.regon_api.RegonAPI._create_service')
 def test_regon_api_auth_failure(
     mocked_create_service, mocked_check_session, mocked_Client,
     mocked_Session, api_mock
