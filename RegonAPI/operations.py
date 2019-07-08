@@ -2,14 +2,15 @@
     Extends RegonAPI with operations
 """
 from RegonAPI.parsers import parse_xml_response
-from RegonAPI.settings import REPORTS
 from RegonAPI.exceptions import ApiUnknownReportNameError
+
+from RegonAPI.settings import OPERATIONS
 
 
 class RegonAPIOperations(object):
     def searchData(self, krs=None, regon=None, nip=None, regons9=None,
                    regons14=None, krss=None, nips=None):
-        """Search data (DaneSzukaj wrapper)
+        """Search data
 
         Parameters
         ----------
@@ -87,7 +88,12 @@ class RegonAPIOperations(object):
             if k in map_.keys():
                 if v is not None:
                     request_data[search_param][map_[k]] = v
-        response = self.service.DaneSzukaj(**request_data)
+
+        wsdl_method = getattr(
+            self.service,
+            OPERATIONS["alias_search_data"][self.bir_version]
+        )
+        response = wsdl_method(**request_data)
         return parse_xml_response(response) if response else None
 
     def dataDownloadFullReport(self, regon, report_name, strict=True):
@@ -115,7 +121,7 @@ class RegonAPIOperations(object):
             If strict=True and provided report name is not included in
             predefined list of valid report names
         """
-        if strict is True and report_name not in REPORTS:
+        if strict is True and report_name not in self.reports:
             raise ApiUnknownReportNameError(report_name)
         request_data = {
             "pRegon": regon,

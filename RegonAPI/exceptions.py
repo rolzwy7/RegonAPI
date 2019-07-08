@@ -29,6 +29,13 @@ class ApiUnknownReportNameError(ApiError):
             data=data)
 
 
+class ApiInvalidBIRVersionProvided(ApiError):  # TODO: test case
+
+    def __init__(self, data, choices):
+        self.data = 'Invailid BIR version provided: {data} not in {choices}'.format(
+            data=data, choices=choices)
+
+
 # -------------------------------------------------
 # Converters
 # -------------------------------------------------

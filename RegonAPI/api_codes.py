@@ -1,7 +1,11 @@
+"""
+    Translation of API codes to available languages
+"""
+
 import json
 
 from RegonAPI import settings
-from RegonAPI.api_codes_json import API_CODES
+from RegonAPI.settings import API_CODES
 from RegonAPI.exceptions import ApiCodeTranslationError
 
 
@@ -14,6 +18,8 @@ def t(method, code, force_lang=None):
         Regon API operation (ex. GetValue)
     code : str
         API code response (ex. '1', '2', ...)
+    force_lang: str
+        forces function to translate to provided language despite settings
 
     Returns
     -------
@@ -24,6 +30,10 @@ def t(method, code, force_lang=None):
         if settings.lang is "all".
         Translated message in all available languages.
 
+    Raises
+    ------
+    ApiCodeTranslationError
+        if translation couldn't be performed
     """
     lang = settings.lang if force_lang is None else force_lang
     # Get by method

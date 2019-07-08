@@ -1,16 +1,19 @@
 import logging
 
+from requests import Session
 from zeep.transports import Transport
 from zeep import Client
-from requests import Session
 
-from RegonAPI.exceptions import ApiAuthenticationError
 from RegonAPI.api_codes import t
+from RegonAPI.exceptions import ApiInvalidBIRVersionProvided
+from RegonAPI.exceptions import ApiAuthenticationError
 from RegonAPI.operations import RegonAPIOperations
-
 from RegonAPI.settings import logging_level
 from RegonAPI.settings import logging_file_handler_level
 from RegonAPI.settings import logging_stream_handler_level
+from RegonAPI.settings import BIR_VERSIONS
+from RegonAPI.settings import BIR_SETTINGS
+from RegonAPI.settings import REPORTS
 
 # logger configuration
 logger = logging.getLogger(__name__)
@@ -32,15 +35,16 @@ logger.addHandler(sh)
 # logger configuration End
 
 
+# TODO: New class desc
 class RegonAPI(RegonAPIOperations):
     """Regon API client
 
     Parameters
     ----------
-    wsdl : str
-        Regon API WSDL (Web Services Description Language) URL
-    service_url : str
-        Service URL provided by RegonAPI Administrators
+    bir_version : str
+        BIR version to use
+    is_production : bool
+        Production if True, Test if False
     service_namespace : str
         Service namespace default: {http://tempuri.org/}e3
 
@@ -60,16 +64,34 @@ class RegonAPI(RegonAPIOperations):
         session id
     """
 
-    def __init__(self, wsdl, service_url,
-                 service_namespace='{http://tempuri.org/}e3'):
-        logger.debug('wsdl=%s service_url=%s' % (wsdl, service_url))
-        self.service_namespace = service_namespace
-        self.client = Client(wsdl=wsdl)
-        self.wsdl = wsdl
-        self.service_url = service_url
+    def __init__(
+        self,
+        bir_version="bir1",
+        is_production=False,
+        service_namespace='{http://tempuri.org/}e3'
+    ):
+        # Set BIR version
+        self.bir_version = bir_version.lower()
+        if self.bir_version not in BIR_VERSIONS:
+            raise ApiInvalidBIRVersionProvided(bir_version, BIR_VERSIONS)
+
+        # Set BIR version reports
+        self.reports = REPORTS[self.bir_version]
+
+        # Set API environment
+        api_env = "PROD" if is_production else "TEST"
+
+        # Set WSDL & SERVICE_URL based on BIR version
+        self.wsdl = BIR_SETTINGS[bir_version][api_env]["WSDL"]
+        self.service_url = BIR_SETTINGS[bir_version][api_env]["SERVICE_URL"]
+
+        logger.debug('wsdl=%s service_url=%s' % (self.wsdl, self.service_url))
+
+        self.client = Client(wsdl=self.wsdl)
         self.service = None
         self.key = None
         self.sid = None
+        self.service_namespace = service_namespace
         self._create_service()
 
     def authenticate(self, key, verify=True):
