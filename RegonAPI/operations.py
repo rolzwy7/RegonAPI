@@ -3,7 +3,7 @@
 """
 from RegonAPI.parsers import parse_xml_response
 from RegonAPI.exceptions import ApiUnknownReportNameError
-
+from RegonAPI import validators
 from RegonAPI.settings import OPERATIONS
 
 
@@ -64,6 +64,19 @@ class RegonAPIOperations(object):
             raise TypeError("krss - invalid (list required)")
         if nips is not None and not isinstance(nips, list):
             raise TypeError("nips - invalid (list required)")
+
+        if regons9 is not None:
+            for _ in regons9:
+                validators.is_valid_regon9(_)
+
+        if regons14 is not None and not isinstance(regons14, list):
+            for _ in regons9:
+                validators.is_valid_regon14(_)
+
+        # NIP validation
+
+        # KRS validation
+
         # Validate parameters - End
 
         # join lists
@@ -127,5 +140,9 @@ class RegonAPIOperations(object):
             "pRegon": regon,
             "pNazwaRaportu": report_name
         }
-        response = self.service.DanePobierzPelnyRaport(**request_data)
+        wsdl_method = getattr(
+            self.service,
+            OPERATIONS["alias_data_download_full_report"][self.bir_version]
+        )
+        response = wsdl_method(**request_data)
         return parse_xml_response(response) if response else None

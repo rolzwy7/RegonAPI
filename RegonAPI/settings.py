@@ -47,7 +47,7 @@ OPERATIONS = {
         "bir1": "DanePobierzPelnyRaport",
         "bir1.1": "DanePobierzPelnyRaport"
     },
-    "alias_data_download_full_report": {
+    "alias_data_download_full_group_report": {
         "bir1": NotImplementedError,
         "bir1.1": "DanePobierzRaportZbiorczy"
     }
@@ -56,68 +56,68 @@ OPERATIONS = {
 # DanePobierzPelnyRaport - settings
 DANE_POBIERZ_PELNY_RAPORT_REPORT_NAMES = [
     {
-     "bir1": "PublDaneRaportFizycznaOsoba",
-     "bir1.1": "BIR11OsFizycznaDaneOgolne"
+         "bir1": "PublDaneRaportFizycznaOsoba",
+         "bir1.1": "BIR11OsFizycznaDaneOgolne"
     },
     {
-     "bir1": "PublDaneRaportDzialalnoscFizycznejCeidg",
-     "bir1.1": "BIR11OsFizycznaDzialalnoscCeidg"
+         "bir1": "PublDaneRaportDzialalnoscFizycznejCeidg",
+         "bir1.1": "BIR11OsFizycznaDzialalnoscCeidg"
     },
     {
-     "bir1": "PublDaneRaportDzialalnoscFizycznejRolnicza",
-     "bir1.1": "BIR11OsFizycznaDzialalnoscRolnicza"
+         "bir1": "PublDaneRaportDzialalnoscFizycznejRolnicza",
+         "bir1.1": "BIR11OsFizycznaDzialalnoscRolnicza"
     },
     {
-     "bir1": "PublDaneRaportDzialalnoscFizycznejPozostala",
-     "bir1.1": "BIR11OsFizycznaDzialalnoscPozostala"
+         "bir1": "PublDaneRaportDzialalnoscFizycznejPozostala",
+         "bir1.1": "BIR11OsFizycznaDzialalnoscPozostala"
     },
     {
-     "bir1": "PublDaneRaportDzialalnoscFizycznejWKrupgn",
-     "bir1.1": "BIR11OsFizycznaDzialalnoscSkreslonaDo20141108"
+         "bir1": "PublDaneRaportDzialalnoscFizycznejWKrupgn",
+         "bir1.1": "BIR11OsFizycznaDzialalnoscSkreslonaDo20141108"
     },
     {
-     "bir1": "PublDaneRaportDzialalnosciFizycznej",
-     "bir1.1": "BIR11OsFizycznaPkd"
+         "bir1": "PublDaneRaportDzialalnosciFizycznej",
+         "bir1.1": "BIR11OsFizycznaPkd"
     },
     {
-     "bir1": "PublDaneRaportLokalneFizycznej",
-     "bir1.1": "BIR11OsFizycznaListaJednLokalnych"
+         "bir1": "PublDaneRaportLokalneFizycznej",
+         "bir1.1": "BIR11OsFizycznaListaJednLokalnych"
     },
     {
-     "bir1": "PublDaneRaportLokalnaFizycznej",
-     "bir1.1": "BIR11JednLokalnaOsFizycznej"
+         "bir1": "PublDaneRaportLokalnaFizycznej",
+         "bir1.1": "BIR11JednLokalnaOsFizycznej"
     },
     {
-     "bir1": "PublDaneRaportDzialalnosciLokalnejFizycznej",
-     "bir1.1": "BIR11JednLokalnaOsFizycznejPkd"
+         "bir1": "PublDaneRaportDzialalnosciLokalnejFizycznej",
+         "bir1.1": "BIR11JednLokalnaOsFizycznejPkd"
     },
     {
-     "bir1": "PublDaneRaportPrawna",
-     "bir1.1": "BIR11OsPrawna"
+         "bir1": "PublDaneRaportPrawna",
+         "bir1.1": "BIR11OsPrawna"
     },
     {
-     "bir1": "PublDaneRaportDzialalnosciPrawnej",
-     "bir1.1": "BIR11OsPrawnaPkd"
+         "bir1": "PublDaneRaportDzialalnosciPrawnej",
+         "bir1.1": "BIR11OsPrawnaPkd"
     },
     {
-     "bir1": "PublDaneRaportLokalnePrawnej",
-     "bir1.1": "BIR11OsPrawnaListaJednLokalnych"
+         "bir1": "PublDaneRaportLokalnePrawnej",
+         "bir1.1": "BIR11OsPrawnaListaJednLokalnych"
     },
     {
-     "bir1": "PublDaneRaportLokalnaPrawnej",
-     "bir1.1": "BIR11JednLokalnaOsPrawnej"
+         "bir1": "PublDaneRaportLokalnaPrawnej",
+         "bir1.1": "BIR11JednLokalnaOsPrawnej"
     },
     {
-     "bir1": "PublDaneRaportDzialalnosciLokalnejPrawnej",
-     "bir1.1": "BIR11JednLokalnaOsPrawnejPkd"
+         "bir1": "PublDaneRaportDzialalnosciLokalnejPrawnej",
+         "bir1.1": "BIR11JednLokalnaOsPrawnejPkd"
     },
     {
-     "bir1": "PublDaneRaportWspolnicyPrawnej",
-     "bir1.1": "BIR11OsPrawnaSpCywilnaWspolnicy"
+         "bir1": "PublDaneRaportWspolnicyPrawnej",
+         "bir1.1": "BIR11OsPrawnaSpCywilnaWspolnicy"
     },
     {
-     "bir1": "PublDaneRaportTypJednostki",
-     "bir1.1": "BIR11TypPodmiotu"
+         "bir1": "PublDaneRaportTypJednostki",
+         "bir1.1": "BIR11TypPodmiotu"
     }
 ]
 
