@@ -1,10 +1,12 @@
+# Last revision: 08.07.2019
+
 import pytest
 
 # Testing commons
 
 # Testing variables
 from RegonAPI.settings import available_languages
-from RegonAPI.api_codes_json import API_CODES
+from RegonAPI.settings import API_CODES
 
 # Raised Exceptions
 from RegonAPI.exceptions import ApiCodeTranslationError
@@ -17,7 +19,7 @@ from RegonAPI.api_codes import t
 # Test prerequisites
 # -------------------------------------------------
 @pytest.mark.first
-def test_api_codes__test_prerequisites():
+def test_Prerequisites():
     assert API_CODES is not None
     assert available_languages is not None
 
@@ -25,8 +27,7 @@ def test_api_codes__test_prerequisites():
 # -------------------------------------------------
 # t - Function
 # -------------------------------------------------
-def test_t_function__valid_calls():
-    """ Tests function against its own map """
+def test_t_CorrectOwnMapProvided_NoProblemsExpected():
     for method_key, method_value in API_CODES.items():
         testing_method = method_key
         for code in method_value.keys():
@@ -43,37 +44,47 @@ def test_t_function__valid_calls():
                 assert False
 
 
-def test_t_function__valid_call():
-    """ Tests single correct call """
+def test_t_CorrectParamsProvided_NoExceptionRaised():
     try:
-        t("GetValue", "4")
+        t(method="GetValue", code="4")
         assert True
     except Exception:
         assert False
 
 
-def test_t_function__invalid_language():
-    """ Tests single invalid call (invalid language)"""
+def test_t_IncorrectCodeParamProvided_ExceptionRaised():
     try:
-        t("GetValue", "4", force_lang="testing")
+        t(method="GetValue", code="testing")
         assert False
     except ApiCodeTranslationError:
         assert True
+    except Exception:
+        assert False
 
 
-def test_t_function__invalid_code():
-    """ Tests single invalid call (invalid code parameter)"""
+def test_t_IncorrectMethodParamProvided_ExceptionRaised():
     try:
-        t("GetValue", "testing")
+        t(method="testing", code="4")
         assert False
     except ApiCodeTranslationError:
         assert True
+    except Exception:
+        assert False
 
 
-def test_t_function__invalid_method_and_code():
-    """ Tests single invalid call (invalid method and code parameter)"""
+def test_t_IncorrectForceLangParamProvided_ExceptionRaised():
     try:
-        t("testing", "testing")
+        t(method="GetValue", code="4", force_lang="testing")
         assert False
     except ApiCodeTranslationError:
         assert True
+    except Exception:
+        assert False
+
+
+def test_t_CorrectForceLangParamProvided_NoExceptionRaised():
+    try:
+        t(method="GetValue", code="4", force_lang="pl")
+        assert True
+    except ApiCodeTranslationError:
+        assert False

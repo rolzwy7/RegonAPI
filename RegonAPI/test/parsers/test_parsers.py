@@ -14,7 +14,7 @@ from RegonAPI.parsers import parse_xml_response
 # Test prerequisites
 # -------------------------------------------------
 @pytest.mark.first
-def test_parsers__test_prerequisites():
+def test_Prerequisites():
     assert True is not None
 
 

@@ -13,7 +13,7 @@ from RegonAPI.exceptions import ApiCodeTranslationError
 # Test prerequisites
 # -------------------------------------------------
 @pytest.mark.first
-def test_regon_api_getters__test_prerequisites():
+def test_Prerequisites():
     assert True
 
 

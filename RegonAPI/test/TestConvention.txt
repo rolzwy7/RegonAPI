@@ -1,0 +1,13 @@
+test directory tree:
+
+test
+  [dirname]
+    test_[dirname]_[things_to_test]
+
+
+test_[function/method name]_[state/input]_[expected behaviour]
+
+
+NoProblemsExpected
+NoExceptionRaised
+ExceptionRaised

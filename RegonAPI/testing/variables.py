@@ -2,11 +2,6 @@
     Test data
 """
 
-from RegonAPI import api_codes_json
-from RegonAPI.settings import REPORTS as SETTINGS_REPORTS
-
-REPORTS = SETTINGS_REPORTS
-
 SERVICE_DOMAIN = 'https://wyszukiwarkaregontest.stat.gov.pl'
 
 WSDL = "{service_domain}/wsBIR/wsdl/UslugaBIRzewnPubl.xsd".format(
@@ -16,7 +11,7 @@ WSDL = "{service_domain}/wsBIR/wsdl/UslugaBIRzewnPubl.xsd".format(
 URL = '{service_domain}/wsBIR/UslugaBIRzewnPubl.svc'.format(
     service_domain=SERVICE_DOMAIN)
 
-CODES = api_codes_json.API_CODES
+# CODES = api_codes_json.API_CODES
 
 KEY = 'abcde12345abcde12345'  # Regon API official test key
 

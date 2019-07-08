@@ -13,5 +13,5 @@ def api_mock(mockClient):
     """ Creates api object with mocked client """
     def fin():
         pass
-    api = RegonAPI.RegonAPI(testing.WSDL, testing.URL)
+    api = RegonAPI.RegonAPI()
     return api
