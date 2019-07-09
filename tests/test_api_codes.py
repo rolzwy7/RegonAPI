@@ -1,32 +1,17 @@
-# Last revision: 08.07.2019
-
 import pytest
 
-# Testing commons
-
-# Testing variables
+from RegonAPI.exceptions import ApiCodeTranslationError
 from RegonAPI.settings import available_languages
 from RegonAPI.settings import API_CODES
-
-# Raised Exceptions
-from RegonAPI.exceptions import ApiCodeTranslationError
-
-# Tested functions
 from RegonAPI.api_codes import t
 
 
-# -------------------------------------------------
-# Test prerequisites
-# -------------------------------------------------
 @pytest.mark.first
-def test_Prerequisites():
+def test_api_codes_Prerequisites():
     assert API_CODES is not None
     assert available_languages is not None
 
 
-# -------------------------------------------------
-# t - Function
-# -------------------------------------------------
 def test_t_CorrectOwnMapProvided_NoProblemsExpected():
     for method_key, method_value in API_CODES.items():
         testing_method = method_key

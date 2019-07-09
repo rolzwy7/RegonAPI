@@ -26,7 +26,10 @@
   <a href="https://github.com/rolzwy7/RegonAPI/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed">
     <img src="https://img.shields.io/github/issues-closed-raw/rolzwy7/RegonAPI.svg">
   </a>
-
+  <a href='https://regonapi.readthedocs.io/en/latest/?badge=latest'>
+    <img src='https://readthedocs.org/projects/regonapi/badge/?version=latest' alt='Documentation Status' />
+  </a>
+  
 </p>
 
 <p align="center">
