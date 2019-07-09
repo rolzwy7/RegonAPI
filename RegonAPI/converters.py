@@ -1,3 +1,7 @@
+"""
+    Converters of codes
+"""
+
 from string import digits
 
 from RegonAPI.exceptions import RegonConvertionError

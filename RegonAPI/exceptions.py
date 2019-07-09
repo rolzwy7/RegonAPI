@@ -1,3 +1,7 @@
+"""
+    All exceptions used in RegonAPI
+"""
+# TODO: Split this into multiple submodules
 
 
 # -------------------------------------------------
@@ -32,8 +36,9 @@ class ApiUnknownReportNameError(ApiError):
 class ApiInvalidBIRVersionProvided(ApiError):  # TODO: test case
 
     def __init__(self, data, choices):
-        self.data = 'Invailid BIR version provided: {data} not in {choices}'.format(
-            data=data, choices=choices)
+        self.data = 'Invailid BIR version: {data} not in {choices}'.format(
+            data=data, choices=choices
+        )
 
 
 # -------------------------------------------------

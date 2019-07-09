@@ -1,3 +1,7 @@
+"""
+    RegonAPI main client class
+"""
+
 import logging
 
 from requests import Session

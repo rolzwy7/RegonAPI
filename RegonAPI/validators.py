@@ -1,3 +1,7 @@
+"""
+    Validator functions
+"""
+
 import re
 
 from RegonAPI import converters
@@ -11,7 +15,7 @@ def _re_is_digit_string(str_, str_len):
     str_ : str
         Digit string to validate
     str_len : int
-        Digit string length
+        Digit string expected length
 
     Returns
     -------

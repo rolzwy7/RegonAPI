@@ -1,6 +1,7 @@
 """
     Extends RegonAPI with operations
 """
+
 from RegonAPI.parsers import parse_xml_response
 from RegonAPI.exceptions import ApiUnknownReportNameError
 from RegonAPI import validators
