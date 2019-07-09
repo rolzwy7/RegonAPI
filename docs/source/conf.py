@@ -1,3 +1,9 @@
+import sys
+import os
+import pkg_resources
+
+sys.path.insert(0, os.path.abspath('../..'))
+
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -20,7 +26,8 @@
 project = 'RegonAPI'
 copyright = '2019, Bartosz Nowakowski'
 author = 'Bartosz Nowakowski'
-
+version = '1.0.0'
+release = version
 
 # -- General configuration ---------------------------------------------------
 
@@ -28,6 +35,9 @@ author = 'Bartosz Nowakowski'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'recommonmark',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -50,3 +60,14 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# The master toctree document.
+master_doc = 'index'
+
+# Custom sidebar templates, maps document names to template names.
+html_sidebars = {
+    '**': [
+        'sidebar-intro.html', 'globaltoc.html', 'sourcelink.html',
+        'searchbox.html'
+    ]
+}
