@@ -8,15 +8,6 @@ from bs4 import BeautifulSoup
 def parse_xml_response(response):
     """Parses XML response to Python dict
 
-    Note
-    ----
-    This function works only if XML structure looks like this:
-    <root>
-        <dane>...</dane>
-        <dane>...</dane>
-        ...
-    </root>
-
     Parameters
     ----------
     response : str

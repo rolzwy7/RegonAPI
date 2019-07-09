@@ -1,0 +1,3 @@
+start make.bat clean
+start sphinx-apidoc -f -o docs\source RegonAPI -H Documentation
+start make.bat html

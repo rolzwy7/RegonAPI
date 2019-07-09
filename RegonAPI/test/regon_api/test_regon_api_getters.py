@@ -20,7 +20,7 @@ def test_Prerequisites():
 # -------------------------------------------------
 # get_last_code - Method
 # -------------------------------------------------
-def test_get_last_code_method__valid_call(api_mock):
+def test_get_last_code_CorrectResponse_ReturnTypeCorrect(api_mock):
     api_mock.service.GetValue.return_value = '4'
     code, msg = api_mock.get_last_code()
     api_mock.service.GetValue.assert_called_once()
@@ -30,7 +30,7 @@ def test_get_last_code_method__valid_call(api_mock):
     assert isinstance(msg, str) or isinstance(msg, dict)
 
 
-def test_get_last_code_method__invalid_call(api_mock):
+def test_get_last_IncorrectResponse_ExceptionRaised(api_mock):
     api_mock.service.GetValue.reset_mock()
     try:
         api_mock.service.GetValue.return_value = 'testing'
@@ -41,12 +41,14 @@ def test_get_last_code_method__invalid_call(api_mock):
         api_mock.service.GetValue.assert_called_once()
         api_mock.service.GetValue.assert_called_with(
             pNazwaParametru='KomunikatKod')
+    except Exception:
+        assert False
 
 
 # -------------------------------------------------
 # get_data_status - Method
 # -------------------------------------------------
-def test_get_data_status_method__valid_call(api_mock):
+def test_get_data_status_CorrectResponse_ReturnTypeCorrect(api_mock):
     api_mock.service.GetValue.return_value = '2000-10-10'
     response = api_mock.get_data_status()
     api_mock.service.GetValue.assert_called_once()
@@ -59,7 +61,7 @@ def test_get_data_status_method__valid_call(api_mock):
 # -------------------------------------------------
 # get_service_status - Method
 # -------------------------------------------------
-def test_get_service_status_method__valid_call(api_mock):
+def test_get_service_status_CorrectResponse_ReturnTypeCorrect(api_mock):
     api_mock.service.GetValue.return_value = '1'
     code, msg = api_mock.get_service_status()
     api_mock.service.GetValue.assert_called_once()
@@ -69,7 +71,7 @@ def test_get_service_status_method__valid_call(api_mock):
     assert isinstance(msg, str) or isinstance(msg, dict)
 
 
-def test_get_service_status_method__invalid_call(api_mock):
+def test_get_service_status_IncorrectResponse_ExceptionRaised(api_mock):
     api_mock.service.GetValue.reset_mock()
     try:
         api_mock.service.GetValue.return_value = 'testing'
@@ -85,7 +87,7 @@ def test_get_service_status_method__invalid_call(api_mock):
 # -------------------------------------------------
 # get_operations - Method
 # -------------------------------------------------
-def test_get_operations_method__valid_calls(api_mock):
+def test_get_operations_OwnOperations_NoProblemsExpected(api_mock):
     api_mock.service._operations = {"a": 1, "b": 2, "c": 3}
     operations = api_mock.get_operations()
     assert operations == ["a", "b", "c"]
@@ -95,10 +97,12 @@ def test_get_operations_method__valid_calls(api_mock):
     assert operations == []
 
 
-def test_get_operations_method__invalid_call(api_mock):
+def test_get_operations_NoOperatoions_ExceptionRaised(api_mock):
     api_mock.service._operations = None
     try:
         operations = api_mock.get_operations()
         assert False
     except AttributeError:
         assert True
+    except Exception:
+        assert False

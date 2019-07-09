@@ -7,6 +7,8 @@ from RegonAPI.test.common import api_mock
 
 # Testing variables
 from RegonAPI.settings import BIR_VERSIONS
+import RegonAPI
+from RegonAPI.exceptions import ApiInvalidBIRVersionProvided
 
 # Raised Exceptions
 
@@ -40,3 +42,13 @@ def test_CorrectParamsProvided_NoProblemsExpected(api_mock):
         api_mock.service_namespace,
         api_mock.service_url
     )
+
+
+def test_IncorrectBirVersionProvided_ExceptionRaised():
+    try:
+        RegonAPI.RegonAPI(bir_version="testing")
+        assert False
+    except ApiInvalidBIRVersionProvided as e:
+        assert True
+    except Exception as e:
+        assert False

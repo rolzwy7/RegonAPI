@@ -107,6 +107,7 @@ class RegonAPI(RegonAPIOperations):
         Session object. There is no need to set it manually.
 
         This method additionaly sets 'key' attribute
+
         This method additionaly sets 'sid' attribute
 
         Parameters
