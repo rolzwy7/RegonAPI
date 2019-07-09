@@ -8,4 +8,4 @@ install:
   - easy_install distribute
   - pip install -r requirements.txt
 script:
-  - pytest -v RegonAPI\test
+  - pytest -v RegonAPI/test
