@@ -29,7 +29,10 @@
   <a href='https://regonapi.readthedocs.io/en/latest/?badge=latest'>
     <img src='https://readthedocs.org/projects/regonapi/badge/?version=latest' alt='Documentation Status' />
   </a>
-  
+  <a href='https://regonapi.readthedocs.io/en/latest/?badge=latest'>
+    <img src='https://img.shields.io/travis/com/rolzwy7/RegonAPI.svg' alt='Documentation Status' />
+  </a>
+
 </p>
 
 <p align="center">
