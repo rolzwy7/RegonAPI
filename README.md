@@ -15,28 +15,28 @@
 
 <p align="center">
   <a href="https://github.com/rolzwy7/RegonAPI/releases">
-    <img src="https://img.shields.io/github/tag/rolzwy7/RegonAPI.svg" alt="Version">
+    <img src="https://img.shields.io/github/tag/rolzwy7/RegonAPI.svg" alt="Github Release Tag">
   </a>
   <a href="https://pypi.org/project/RegonAPI/">
-    <img src="https://img.shields.io/pypi/v/RegonAPI.svg" alt="Version">
+    <img src="https://img.shields.io/pypi/v/RegonAPI.svg" alt="PyPi Version">
   </a>
   <a href="LICENSE">
-    <img src="https://img.shields.io/github/license/rolzwy7/RegonAPI.svg">
+    <img src="https://img.shields.io/github/license/rolzwy7/RegonAPI.svg" alt="License">
   </a>
-  <a href="https://github.com/rolzwy7/RegonAPI/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed">
+  <a href="https://github.com/rolzwy7/RegonAPI/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed" alt="Closed issues">
     <img src="https://img.shields.io/github/issues-closed-raw/rolzwy7/RegonAPI.svg">
   </a>
   <a href='https://regonapi.readthedocs.io/en/latest/?badge=latest'>
-    <img src='https://readthedocs.org/projects/regonapi/badge/?version=latest' alt='Documentation Status' />
+    <img src='https://readthedocs.org/projects/regonapi/badge/?version=latest' alt='Documentation status' />
   </a>
-  <a href='https://regonapi.readthedocs.io/en/latest/?badge=latest'>
-    <img src='https://img.shields.io/travis/com/rolzwy7/RegonAPI.svg' alt='Documentation Status' />
+  <a href='#travis'>
+    <img src='https://img.shields.io/travis/com/rolzwy7/RegonAPI.svg' alt='Build status' />
   </a>
 
 </p>
 
 <p align="center">
-  <a href="#documentation">Documentation</a> •
+  <a href="https://regonapi.readthedocs.io/en/latest/">Documentation</a> •
   <a href="https://github.com/rolzwy7/RegonAPI/wiki">Wiki</a> •
   <a href="https://github.com/rolzwy7/RegonAPI/wiki/Installation-&-Usage">Installation & Usage</a> •
   <a href="https://github.com/rolzwy7/RegonAPI/wiki/Compatibility">Compatibility</a>
@@ -70,6 +70,40 @@ res = api.dataDownloadFullReport(CD_PROJEKT_REGON9, "PublDaneRaportPrawna")
 pprint(res)
 ```
 
+Result of the above code
+
+```
+[{'praw_adSiedzGmina_Nazwa': 'Praga-Północ',
+  'praw_adSiedzGmina_Symbol': '088',
+  'praw_adSiedzKodPocztowy': '03301',
+  'praw_adSiedzKraj_Nazwa': 'POLSKA',
+  'praw_adSiedzKraj_Symbol': 'PL',
+  'praw_adSiedzMiejscowoscPoczty_Nazwa': 'Warszawa',
+  'praw_adSiedzMiejscowoscPoczty_Symbol': '0919298',
+  'praw_adSiedzMiejscowosc_Nazwa': 'Warszawa',
+  'praw_adSiedzMiejscowosc_Symbol': '0919298',
+  ......
+  truncated
+  ......
+  'praw_formaFinansowania_Symbol': '1',
+  'praw_formaWlasnosci_Nazwa': 'WŁASNOŚĆ PRYWATNA KRAJOWA POZOSTAŁA',
+  'praw_formaWlasnosci_Symbol': '215',
+  'praw_jednostekLokalnych': '0',
+  'praw_nazwa': 'CD PROJEKT SPÓŁKA AKCYJNA',
+  'praw_nazwaSkrocona': 'CD PROJEKT S.A.',
+  'praw_nip': '7342867148',
+  ......
+  truncated
+  ......
+  'praw_podstawowaFormaPrawna_Nazwa': 'OSOBA PRAWNA',
+  'praw_podstawowaFormaPrawna_Symbol': '1',
+  'praw_regon14': '49270733300000',
+  'praw_rodzajRejestruEwidencji_Nazwa': 'REJESTR PRZEDSIĘBIORCÓW',
+  'praw_rodzajRejestruEwidencji_Symbol': '138',
+  'praw_szczegolnaFormaPrawna_Nazwa': 'SPÓŁKI AKCYJNE',
+  'praw_szczegolnaFormaPrawna_Symbol': '16'}]
+```
+
 ### Report names
 All report names used by function <i>dataDownloadFullReport</i> are listed <a href="https://github.com/rolzwy7/RegonAPI/wiki/Report-names">here</a> or in API documentation.
 
@@ -80,5 +114,5 @@ All report names used by function <i>dataDownloadFullReport</i> are listed <a hr
 ### Tests
 All tests can be performed by executing this command
 ```
-python -m pytest -v RegonAPI\test
+python -m pytest tests
 ```
