@@ -116,3 +116,5 @@ All tests can be performed by executing this command
 ```
 python -m pytest tests
 ```
+
+<img src="http://bit.ly/2xlhl2x">
