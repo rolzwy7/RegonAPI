@@ -55,6 +55,12 @@
 ### Obtaining API Key
 See [Obtaining API Key](https://github.com/rolzwy7/RegonAPI/wiki/Obtaining-API-Key) wiki section
 
+### Installation
+
+```
+pip install RegonAPI
+```
+
 ### Example
 All usage examples are available in [examples](https://github.com/rolzwy7/RegonAPI/tree/master/examples) directory
 ```python
