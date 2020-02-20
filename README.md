@@ -32,7 +32,9 @@
   <a href='#travis'>
     <img src='https://img.shields.io/travis/com/rolzwy7/RegonAPI.svg' alt='Build status' />
   </a>
-
+  <a href='#pypi_downloads'>
+    <img src='https://img.shields.io/pypi/dm/RegonAPI' alt='PyPi downloads' />
+  </a>
 </p>
 
 <p align="center">

@@ -1,0 +1,12 @@
+import os
+import logging
+
+from RegonAPI.consts import *
+
+# Language - settings
+lang = 'eng'
+
+# Logger - settings
+available_languages = ["pl", "eng"]
+
+LOGGING_FORMAT = "\r%(asctime)s, %(levelname)-8s [`%(funcName)s` %(filename)s:%(lineno)d] %(message)s"

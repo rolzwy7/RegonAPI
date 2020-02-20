@@ -6,7 +6,7 @@ BIR_SETTINGS = {
         },
         "PROD": {
             "SERVICE_URL": "https://wyszukiwarkaregon.stat.gov.pl/wsBIR/UslugaBIRzewnPubl.svc",
-            # Yes, it's the same WSDL address for test and production.
+            # Yes, it's the same WSDL address for test and production in version 1.0
             "WSDL": "https://wyszukiwarkaregontest.stat.gov.pl/wsBIR/wsdl/UslugaBIRzewnPubl.xsd"
         }
     },
@@ -17,6 +17,7 @@ BIR_SETTINGS = {
         },
         "PROD": {
             "SERVICE_URL": "https://wyszukiwarkaregon.stat.gov.pl/wsBIR/UslugaBIRzewnPubl.svc",
+            # Sneaky correction in version 1.1
             "WSDL": "https://wyszukiwarkaregon.stat.gov.pl/wsBIR/wsdl/UslugaBIRzewnPubl-ver11-prod.wsdl"
         }
     }

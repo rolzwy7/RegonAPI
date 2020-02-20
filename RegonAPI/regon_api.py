@@ -2,6 +2,12 @@
     RegonAPI main client class
 """
 
+# try:
+#     # from urllib.parse import urlparse
+# except ImportError:
+#     print('')
+#     quit()
+
 import logging
 
 from requests import Session
@@ -9,35 +15,28 @@ from zeep.transports import Transport
 from zeep import Client
 
 from RegonAPI.api_codes import t
-from RegonAPI.exceptions import ApiInvalidBIRVersionProvided
-from RegonAPI.exceptions import ApiAuthenticationError
+from RegonAPI.exceptions import (
+    ApiInvalidBIRVersionProvided,
+    ApiAuthenticationError
+)
 from RegonAPI.operations import RegonAPIOperations
-from RegonAPI.settings import logging_level
-from RegonAPI.settings import logging_file_handler_level
-from RegonAPI.settings import logging_stream_handler_level
-from RegonAPI.settings import BIR_VERSIONS
-from RegonAPI.settings import BIR_SETTINGS
-from RegonAPI.settings import REPORTS
+from RegonAPI.settings import (
+    lang,
+    BIR_VERSIONS,
+    BIR_SETTINGS,
+    REPORTS,
+    DEV_ENV_WARNINGS,
+    API_KEY_TEST_ENV,
+    LOGGING_FORMAT
+)
 
 # logger configuration
+ROOT_LOGGING_LEVEL = logging.ERROR
+LOCAL_LOGGING_LEVEL = logging.WARNING
+logging.basicConfig(format=LOGGING_FORMAT)
+logging.root.setLevel(ROOT_LOGGING_LEVEL)
 logger = logging.getLogger(__name__)
-logger.setLevel(logging_level)
-
-# fh = logging.FileHandler('debug.log')
-# fh.setLevel(logging_file_handler_level)
-
-sh = logging.StreamHandler()
-sh.setLevel(logging_stream_handler_level)
-
-formatter = logging.Formatter(
-    '[%(levelname)s][%(asctime)s] %(name)s %(funcName)s - %(message)s')
-# fh.setFormatter(formatter)
-sh.setFormatter(formatter)
-
-# logger.addHandler(fh)
-logger.addHandler(sh)
-# logger configuration End
-
+logger.setLevel(LOCAL_LOGGING_LEVEL)
 
 # TODO: New class desc
 class RegonAPI(RegonAPIOperations):
@@ -70,7 +69,7 @@ class RegonAPI(RegonAPIOperations):
 
     def __init__(
         self,
-        bir_version="bir1",
+        bir_version="bir1.1",
         is_production=False,
         service_namespace='{http://tempuri.org/}e3'
     ):
@@ -84,6 +83,9 @@ class RegonAPI(RegonAPIOperations):
 
         # Set API environment
         api_env = "PROD" if is_production else "TEST"
+        if not is_production:
+            logger.warning(DEV_ENV_WARNINGS["WARN_IS_NOT_PRODUCTION"][lang])
+
 
         # Set WSDL & SERVICE_URL based on BIR version
         self.wsdl = BIR_SETTINGS[bir_version][api_env]["WSDL"]
@@ -95,6 +97,7 @@ class RegonAPI(RegonAPIOperations):
         self.service = None
         self.key = None
         self.sid = None
+        self.is_production = is_production
         self.service_namespace = service_namespace
         self._create_service()
 
@@ -127,6 +130,9 @@ class RegonAPI(RegonAPIOperations):
         ApiAuthenticationError
             If authentication was a failure
         """
+        if not self.is_production:
+            key = API_KEY_TEST_ENV
+
         logger.debug('key=%s verify=%s' % (key, verify))
         sid = self.service.Zaloguj(key)
         session = Session()
@@ -138,7 +144,7 @@ class RegonAPI(RegonAPIOperations):
         self._create_service()
         if verify:
             if not self._check_session():
-                logger.warning('Authentication failed')
+                logger.error('Authentication failed')
                 raise ApiAuthenticationError(key)
             else:
                 logger.debug('Authenticated successfully')
@@ -228,6 +234,7 @@ class RegonAPI(RegonAPIOperations):
         logger.debug('Creating service with url %s' % self.service_url)
         self.service = self.client.create_service(
             self.service_namespace, self.service_url)
+
 
     def _check_session(self):
         """Checks Regon API for confirmation of successfull authentication
