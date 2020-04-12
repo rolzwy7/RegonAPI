@@ -128,25 +128,7 @@ for report_name in REPORTS:
 Result of the above code
 
 ```
-[{'DataZakonczeniaDzialalnosci': '',
-  'Gmina': 'Praga-Północ',
-  'KodPocztowy': '03-301',
-  'Miejscowosc': 'Warszawa',
-  'MiejscowoscPoczty': 'Warszawa',
-  'Nazwa': 'CD PROJEKT SPÓŁKA AKCYJNA',
-  'Nip': '7342867148',
-  'NrLokalu': '',
-  'NrNieruchomosci': '74',
-  'Powiat': 'm. st. Warszawa',
-  'Regon': '492707333',
-  'SilosID': '6',
-  'StatusNip': '',
-  'Typ': 'P',
-  'Ulica': 'ul. Test-Wilcza',
-  'Wojewodztwo': 'MAZOWIECKIE'}]
-  ......
-  truncated
-  ......
+  ... truncated ...
 [{'praw_adSiedzGmina_Nazwa': 'Praga-Północ',
   'praw_adSiedzGmina_Symbol': '088',
   'praw_adSiedzKodPocztowy': '03301',
@@ -156,9 +138,7 @@ Result of the above code
   'praw_adSiedzMiejscowoscPoczty_Symbol': '0919298',
   'praw_adSiedzMiejscowosc_Nazwa': 'Warszawa',
   'praw_adSiedzMiejscowosc_Symbol': '0919298',
-  ......
-  truncated
-  ......
+  ... truncated ...
   'praw_formaFinansowania_Symbol': '1',
   'praw_formaWlasnosci_Nazwa': 'WŁASNOŚĆ PRYWATNA KRAJOWA POZOSTAŁA',
   'praw_formaWlasnosci_Symbol': '215',
@@ -166,24 +146,15 @@ Result of the above code
   'praw_nazwa': 'CD PROJEKT SPÓŁKA AKCYJNA',
   'praw_nazwaSkrocona': 'CD PROJEKT S.A.',
   'praw_nip': '7342867148',
-  ......
-  truncated
-  ......
-  'praw_podstawowaFormaPrawna_Nazwa': 'OSOBA PRAWNA',
-  'praw_podstawowaFormaPrawna_Symbol': '1',
-  'praw_regon14': '49270733300000',
-  'praw_rodzajRejestruEwidencji_Nazwa': 'REJESTR PRZEDSIĘBIORCÓW',
-  'praw_rodzajRejestruEwidencji_Symbol': '138',
-  'praw_szczegolnaFormaPrawna_Nazwa': 'SPÓŁKI AKCYJNE',
-  'praw_szczegolnaFormaPrawna_Symbol': '16'}]
+  ... truncated ...
 ```
 
 ### Report names
 All report names used by function <i>dataDownloadFullReport</i> are listed <a href="https://github.com/rolzwy7/RegonAPI/wiki/Report-names">here</a> or in API documentation.
 
 ### API documentation
-- [BIR Version 1 Documentation](https://api.stat.gov.pl/Content/files/regon/regon_-_instrukcja_techniczna_bir1_dla_podmiotow_komercyjnych_v019.zip)
 - [BIR Version 1.1 Documentation](https://api.stat.gov.pl/Content/files/regon/GUS-Regon-UslugaBIR11-dokumentacja_v1.02.zip)
+- [BIR Version 1 Documentation](https://api.stat.gov.pl/Content/files/regon/regon_-_instrukcja_techniczna_bir1_dla_podmiotow_komercyjnych_v019.zip)
 
 ### Tests
 All tests can be performed by executing this command
