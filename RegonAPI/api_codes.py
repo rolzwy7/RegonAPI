@@ -4,9 +4,9 @@
 
 import json
 
-from RegonAPI import settings
-from RegonAPI.settings import API_CODES
-from RegonAPI.exceptions import ApiCodeTranslationError
+from . import settings
+from .settings import API_CODES
+from .exceptions import ApiCodeTranslationError
 
 
 def t(method, code, force_lang=None):

@@ -1,2 +1,2 @@
-from RegonAPI.exceptions.api import *
-from RegonAPI.exceptions.converters import *
+from .api import *
+from .converters import *

@@ -1,1 +1,1 @@
-from RegonAPI.regon_api import *
+from .regon_api import *

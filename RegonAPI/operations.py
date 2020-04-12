@@ -2,10 +2,10 @@
     Extends RegonAPI with operations
 """
 
-from RegonAPI.parsers import parse_xml_response
-from RegonAPI.exceptions import ApiUnknownReportNameError
-from RegonAPI import validators
-from RegonAPI.settings import OPERATIONS
+from .parsers import parse_xml_response
+from .exceptions import ApiUnknownReportNameError
+from . import validators
+from .settings import OPERATIONS
 
 
 class RegonAPIOperations(object):

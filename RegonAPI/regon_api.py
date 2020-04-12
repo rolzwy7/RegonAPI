@@ -2,11 +2,10 @@
     RegonAPI main client class
 """
 
-# try:
-#     # from urllib.parse import urlparse
-# except ImportError:
-#     print('')
-#     quit()
+import sys
+if sys.version_info[0] < 3:
+  print("Sorry. This module doesn't support Python2")
+  sys.exit(1)
 
 import logging
 
@@ -14,13 +13,13 @@ from requests import Session
 from zeep.transports import Transport
 from zeep import Client
 
-from RegonAPI.api_codes import t
-from RegonAPI.exceptions import (
+from .api_codes import t
+from .exceptions import (
     ApiInvalidBIRVersionProvided,
     ApiAuthenticationError
 )
-from RegonAPI.operations import RegonAPIOperations
-from RegonAPI.settings import (
+from .operations import RegonAPIOperations
+from .settings import (
     lang,
     BIR_VERSIONS,
     BIR_SETTINGS,

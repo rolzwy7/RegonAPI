@@ -4,8 +4,8 @@
 
 from string import digits
 
-from RegonAPI.exceptions import RegonConvertionError
-from RegonAPI import validators
+from .exceptions import RegonConvertionError
+from . import validators
 
 
 REGON9_WEIGHTS = [8, 9, 2, 3, 4, 5, 6, 7]

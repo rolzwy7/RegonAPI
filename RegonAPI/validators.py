@@ -4,7 +4,7 @@
 
 import re
 
-from RegonAPI import converters
+from . import converters
 
 
 def _re_is_digit_string(str_, str_len):

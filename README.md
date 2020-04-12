@@ -66,21 +66,87 @@ pip install RegonAPI
 ### Example
 All usage examples are available in [examples](https://github.com/rolzwy7/RegonAPI/tree/master/examples) directory
 ```python
-from RegonAPI import RegonAPI
 from pprint import pprint
 
-API_KEY = "abcde12345abcde12345"
+from RegonAPI import RegonAPI
+from RegonAPI.exceptions import ApiAuthenticationError
+
+# Available reports
+REPORTS = [
+    "BIR11OsFizycznaDaneOgolne",
+    "BIR11OsFizycznaDzialalnoscCeidg",
+    "BIR11OsFizycznaDzialalnoscRolnicza",
+    "BIR11OsFizycznaDzialalnoscPozostala",
+    "BIR11OsFizycznaDzialalnoscSkreslonaDo20141108",
+    "BIR11OsFizycznaPkd",
+    "BIR11OsFizycznaListaJednLokalnych",
+    "BIR11JednLokalnaOsFizycznej",
+    "BIR11JednLokalnaOsFizycznejPkd",
+    "BIR11OsPrawna",
+    "BIR11OsPrawnaPkd",
+    "BIR11OsPrawnaListaJednLokalnych",
+    "BIR11JednLokalnaOsPrawnej",
+    "BIR11JednLokalnaOsPrawnejPkd",
+    "BIR11OsPrawnaSpCywilnaWspolnicy",
+    "BIR11TypPodmiotu",
+]
+
+TEST_API_KEY = "abcde12345abcde12345"
+CD_PROJEKT_NIP = "7342867148"
+CD_PROJEKT_KRS = "0000006865"
 CD_PROJEKT_REGON9 = "492707333"
 
-api = RegonAPI(bir_version="bir1") # BIR version 1
-api.authenticate(key=API_KEY)
-res = api.dataDownloadFullReport(CD_PROJEKT_REGON9, "PublDaneRaportPrawna")
-pprint(res)
+# Authentication
+api = RegonAPI(bir_version="bir1.1", is_production=False)
+try:
+    api.authenticate(key=TEST_API_KEY)
+except ApiAuthenticationError as e:
+    print("[-]", e)
+    exit(0)
+except Exception as e:
+    raise
+
+# Search by NIP
+result = api.searchData(nip=CD_PROJEKT_NIP)
+pprint(result)
+
+# Search by KRS
+result = api.searchData(krs=CD_PROJEKT_KRS)
+pprint(result)
+
+# Search by REGON
+result = api.searchData(regon=CD_PROJEKT_REGON9)
+pprint(result)
+
+# Get all reports by REGON
+for report_name in REPORTS:
+    result = api.dataDownloadFullReport(CD_PROJEKT_REGON9, report_name)
+    print("\n[*] Report:\n", report_name)
+    pprint(result)
 ```
 
 Result of the above code
 
 ```
+[{'DataZakonczeniaDzialalnosci': '',
+  'Gmina': 'Praga-Północ',
+  'KodPocztowy': '03-301',
+  'Miejscowosc': 'Warszawa',
+  'MiejscowoscPoczty': 'Warszawa',
+  'Nazwa': 'CD PROJEKT SPÓŁKA AKCYJNA',
+  'Nip': '7342867148',
+  'NrLokalu': '',
+  'NrNieruchomosci': '74',
+  'Powiat': 'm. st. Warszawa',
+  'Regon': '492707333',
+  'SilosID': '6',
+  'StatusNip': '',
+  'Typ': 'P',
+  'Ulica': 'ul. Test-Wilcza',
+  'Wojewodztwo': 'MAZOWIECKIE'}]
+  ......
+  truncated
+  ......
 [{'praw_adSiedzGmina_Nazwa': 'Praga-Północ',
   'praw_adSiedzGmina_Symbol': '088',
   'praw_adSiedzKodPocztowy': '03301',
