@@ -11,7 +11,9 @@ WARNINGS = {
 
         \r\tUsing test API key: '{API_KEY_TEST_ENV}'
         \r\tKey provided to `authenticate` method will be overridden.\n
-        """.format(API_KEY_TEST_ENV=API_KEY_TEST_ENV),
+        """.format(
+            API_KEY_TEST_ENV=API_KEY_TEST_ENV
+        ),
         "pl": """
         \n\r\tUżywasz środowiska TESTOWEGO.
         \r\tUstaw `is_production=True` podczas konstrukcji
@@ -19,6 +21,8 @@ WARNINGS = {
 
         \r\tUżywany jest klucz testowy: '{API_KEY_TEST_ENV}'
         \r\tKlucz przekazany do metody `authenticate` zostanie nadpisany.\n
-        """.format(API_KEY_TEST_ENV=API_KEY_TEST_ENV),
+        """.format(
+            API_KEY_TEST_ENV=API_KEY_TEST_ENV
+        ),
     }
 }

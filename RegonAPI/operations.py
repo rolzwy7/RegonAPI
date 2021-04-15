@@ -9,8 +9,16 @@ from .settings import OPERATIONS
 
 
 class RegonAPIOperations(object):
-    def searchData(self, krs=None, regon=None, nip=None, regons9=None,
-                   regons14=None, krss=None, nips=None):
+    def searchData(
+        self,
+        krs=None,
+        regon=None,
+        nip=None,
+        regons9=None,
+        regons14=None,
+        krss=None,
+        nips=None,
+    ):
         """Search data
 
         Parameters
@@ -96,7 +104,7 @@ class RegonAPIOperations(object):
             "regons9": "Regony9zn",
             "regons14": "Regony14zn",
             "krss": "Krsy",
-            "nips": "Nipy"
+            "nips": "Nipy",
         }
         for k, v in locals().items():
             if k in map_.keys():
@@ -104,8 +112,7 @@ class RegonAPIOperations(object):
                     request_data[search_param][map_[k]] = v
 
         wsdl_method = getattr(
-            self.service,
-            OPERATIONS["alias_search_data"][self.bir_version]
+            self.service, OPERATIONS["alias_search_data"][self.bir_version]
         )
         response = wsdl_method(**request_data)
         return parse_xml_response(response) if response else None
@@ -137,13 +144,10 @@ class RegonAPIOperations(object):
         """
         if strict is True and report_name not in self.reports:
             raise ApiUnknownReportNameError(report_name)
-        request_data = {
-            "pRegon": regon,
-            "pNazwaRaportu": report_name
-        }
+        request_data = {"pRegon": regon, "pNazwaRaportu": report_name}
         wsdl_method = getattr(
             self.service,
-            OPERATIONS["alias_data_download_full_report"][self.bir_version]
+            OPERATIONS["alias_data_download_full_report"][self.bir_version],
         )
         response = wsdl_method(**request_data)
         return parse_xml_response(response) if response else None

@@ -25,11 +25,11 @@ def parse_xml_response(response):
     """
     if not isinstance(response, str):
         raise TypeError("parse_xml_response - response")
-    soup = BeautifulSoup(response, 'xml')
+    soup = BeautifulSoup(response, "xml")
     ret = []
     # Parse data
-    filter_arr = ['\r\n', '\n', '\r']
-    for dane in soup('dane'):
+    filter_arr = ["\r\n", "\n", "\r"]
+    for dane in soup("dane"):
         children = list(filter(lambda x: x not in filter_arr, dane.children))
         dict_elem = {}
         for _ in children:

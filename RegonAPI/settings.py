@@ -4,7 +4,7 @@ import logging
 from .consts import *
 
 # Language - settings
-lang = 'eng'
+lang = "eng"
 
 # Logger - settings
 available_languages = ["pl", "eng"]

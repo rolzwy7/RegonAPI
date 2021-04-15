@@ -50,7 +50,6 @@ def t(method, code, force_lang=None):
 
     msg = msg.get(lang, None)
     if msg is None:
-        raise ApiCodeTranslationError("%s->%s for lang: '%s'" % (
-            method, code, lang))
+        raise ApiCodeTranslationError("%s->%s for lang: '%s'" % (method, code, lang))
 
     return msg
