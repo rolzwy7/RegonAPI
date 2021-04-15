@@ -97,7 +97,9 @@ CD_PROJEKT_KRS = "0000006865"
 CD_PROJEKT_REGON9 = "492707333"
 
 # Authentication
-api = RegonAPI(bir_version="bir1.1", is_production=False)
+api = RegonAPI(
+    bir_version="bir1.1", is_production=False, timeout=10, operation_timeout=10
+)
 try:
     api.authenticate(key=TEST_API_KEY)
 except ApiAuthenticationError as e:

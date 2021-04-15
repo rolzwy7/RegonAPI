@@ -3,9 +3,10 @@
 """
 
 import sys
+
 if sys.version_info[0] < 3:
-  print("Sorry. This module doesn't support Python2")
-  sys.exit(1)
+    print("Sorry. This module doesn't support Python2")
+    sys.exit(1)
 
 import logging
 
@@ -14,10 +15,7 @@ from zeep.transports import Transport
 from zeep import Client
 
 from .api_codes import t
-from .exceptions import (
-    ApiInvalidBIRVersionProvided,
-    ApiAuthenticationError
-)
+from .exceptions import ApiInvalidBIRVersionProvided, ApiAuthenticationError
 from .operations import RegonAPIOperations
 from .settings import (
     lang,
@@ -26,7 +24,7 @@ from .settings import (
     REPORTS,
     DEV_ENV_WARNINGS,
     API_KEY_TEST_ENV,
-    LOGGING_FORMAT
+    LOGGING_FORMAT,
 )
 
 # logger configuration
@@ -37,7 +35,7 @@ logging.root.setLevel(ROOT_LOGGING_LEVEL)
 logger = logging.getLogger(__name__)
 logger.setLevel(LOCAL_LOGGING_LEVEL)
 
-# TODO: New class desc
+
 class RegonAPI(RegonAPIOperations):
     """Regon API client
 
@@ -49,6 +47,10 @@ class RegonAPI(RegonAPIOperations):
         Production if True, Test if False
     service_namespace : str
         Service namespace default: {http://tempuri.org/}e3
+    timeout
+        (Zeep) The timeout for loading wsdl and xsd documents.
+    operation_timeout
+        (Zeep) The timeout for operations (POST/GET).
 
     Attributes
     ----------
@@ -70,8 +72,14 @@ class RegonAPI(RegonAPIOperations):
         self,
         bir_version="bir1.1",
         is_production=False,
-        service_namespace='{http://tempuri.org/}e3'
+        service_namespace="{http://tempuri.org/}e3",
+        timeout=10,
+        operation_timeout=10,
     ):
+        # Set timeouts for zeep's Transport class instance
+        self.timeout = timeout
+        self.operation_timeout = operation_timeout
+
         # Set BIR version
         self.bir_version = bir_version.lower()
         if self.bir_version not in BIR_VERSIONS:
@@ -85,12 +93,11 @@ class RegonAPI(RegonAPIOperations):
         if not is_production:
             logger.warning(DEV_ENV_WARNINGS["WARN_IS_NOT_PRODUCTION"][lang])
 
-
         # Set WSDL & SERVICE_URL based on BIR version
         self.wsdl = BIR_SETTINGS[bir_version][api_env]["WSDL"]
         self.service_url = BIR_SETTINGS[bir_version][api_env]["SERVICE_URL"]
 
-        logger.debug('wsdl=%s service_url=%s' % (self.wsdl, self.service_url))
+        logger.debug("wsdl=%s service_url=%s" % (self.wsdl, self.service_url))
 
         self.client = Client(wsdl=self.wsdl)
         self.service = None
@@ -132,21 +139,25 @@ class RegonAPI(RegonAPIOperations):
         if not self.is_production:
             key = API_KEY_TEST_ENV
 
-        logger.debug('key=%s verify=%s' % (key, verify))
+        logger.debug("key=%s verify=%s" % (key, verify))
         sid = self.service.Zaloguj(key)
         session = Session()
-        session.headers.update({'sid': sid})
+        session.headers.update({"sid": sid})
         self.client = Client(
             wsdl=self.wsdl,
-            transport=Transport(session=session)
+            transport=Transport(
+                session=session,
+                timeout=self.timeout,
+                operation_timeout=self.operation_timeout,
+            ),
         )
         self._create_service()
         if verify:
             if not self._check_session():
-                logger.error('Authentication failed')
+                logger.error("Authentication failed")
                 raise ApiAuthenticationError(key)
             else:
-                logger.debug('Authenticated successfully')
+                logger.debug("Authenticated successfully")
         self.key = key
         self.sid = sid
         return sid
@@ -160,8 +171,8 @@ class RegonAPI(RegonAPIOperations):
             a tuple (api_response : str, translated_message: str, dict)
             translated_message is dict when settings lang='all'
         """
-        response = self.service.GetValue(pNazwaParametru='KomunikatKod')
-        ret = response, t('GetValue', response)
+        response = self.service.GetValue(pNazwaParametru="KomunikatKod")
+        ret = response, t("GetValue", response)
         logger.debug(ret)
         return ret
 
@@ -173,7 +184,7 @@ class RegonAPI(RegonAPIOperations):
         str
             date of last database update
         """
-        response = self.service.GetValue(pNazwaParametru='StanDanych')
+        response = self.service.GetValue(pNazwaParametru="StanDanych")
         logger.debug(response)
         return response
 
@@ -186,8 +197,8 @@ class RegonAPI(RegonAPIOperations):
             a tuple (api_response : str, translated_message: str, dict)
             translated_message is dict when settings lang='all'
         """
-        response = self.service.GetValue(pNazwaParametru='StatusUslugi')
-        ret = response, t('ServiceStatus', response)
+        response = self.service.GetValue(pNazwaParametru="StatusUslugi")
+        ret = response, t("ServiceStatus", response)
         logger.debug(ret)
         return ret
 
@@ -230,10 +241,10 @@ class RegonAPI(RegonAPIOperations):
         __init__ constructor and authenticate method.
         Service is available at self.service.
         """
-        logger.debug('Creating service with url %s' % self.service_url)
+        logger.debug("Creating service with url %s" % self.service_url)
         self.service = self.client.create_service(
-            self.service_namespace, self.service_url)
-
+            self.service_namespace, self.service_url
+        )
 
     def _check_session(self):
         """Checks Regon API for confirmation of successfull authentication
@@ -243,5 +254,5 @@ class RegonAPI(RegonAPIOperations):
         bool
             True if authentication successfull, else False
         """
-        response = self.service.GetValue(pNazwaParametru='StatusSesji')
-        return True if response == '1' else False
+        response = self.service.GetValue(pNazwaParametru="StatusSesji")
+        return True if response == "1" else False
