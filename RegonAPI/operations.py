@@ -3,7 +3,7 @@
 """
 
 from .parsers import parse_xml_response
-from .exceptions import ApiUnknownReportNameError
+from .exceptions import ApiUnknownReportNameError, ApiInvalidDateFormat
 from . import validators
 from .settings import OPERATIONS
 
@@ -176,10 +176,14 @@ class RegonAPIOperations(object):
         ------
         ApiUnknownReportNameError
             If strict=True and provided report name is not included in
-            predefined list of valid report names
+            predefined list of valid report names or report date is in
+            invalid format
         '''
-        if report_name not in self.reports:
-            raise ApiUnknownReportNameError(report_name)
+        if strict is True:
+            if report_name not in self.reports:
+                raise ApiUnknownReportNameError(report_name)
+            if validators.is_valid_date(report_date) is False:
+                raise ApiInvalidDateFormat(report_date)
 
         request_data = {"pDataRaportu": report_date, "pNazwaRaportu": report_name}
         wsdl_method = getattr(

@@ -6,6 +6,7 @@ import re
 import datetime
 
 from . import converters
+from . import settings
 
 
 def _re_is_digit_string(str_, str_len):
@@ -144,13 +145,11 @@ def is_valid_date(date):
         True if valid, False otherwise
     '''
 
-    DATE_FORMAT = '%Y-%m-%d'
-
     if not isinstance(date, str):
         return False
     
     try:
-        datetime.datetime.strptime(date, DATE_FORMAT)
+        datetime.datetime.strptime(date, settings.DATE_FORMAT)
     except Exception:
         return False
     else:
