@@ -113,3 +113,29 @@ def test_searchData_method__invalid_calls(mocked_parse_xml_response, api_mock):
             assert True
         except Exception as e:
             assert True
+
+@mock.patch('RegonAPI.operations.parse_xml_response')
+def test_dataDownloadFullGroupReport_method__valid_calls(
+    mocked_parse_xml_response,
+    api_mock
+):
+    mocked_parse_xml_response.return_value = "testing"
+
+    calls_made = len(api_mock.reports)
+
+    for report in api_mock.reports:
+        assert api_mock.dataDownloadFullGroupReport(report_date='2020-04-16', report_name=report) == "testing"
+
+    assert mocked_parse_xml_response.call_count == calls_made
+    assert api_mock.service.DanePobierzRaportZbiorczy.call_count == calls_made
+
+@mock.patch('RegonAPI.operations.parse_xml_response')
+def test_dataDownloadFullGroupReport_method__invalid_report_name(mocked_parse_xml_response, api_mock):
+    mocked_parse_xml_response.return_value = "testing"
+
+    with pytest.raises(ApiUnknownReportNameError):
+        api_mock.dataDownloadFullGroupReport(
+            report_date='2021-04-16',
+            report_name='test'
+        )
+
