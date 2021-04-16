@@ -3,6 +3,7 @@
 """
 
 import re
+import datetime
 
 from . import converters
 
@@ -128,3 +129,29 @@ def is_valid_regon14(regon14):
         return False
     regon13 = regon14[:13]
     return converters.regon13_to_14(regon13) == regon14
+
+def is_valid_date(date):
+    '''Date string format validation
+
+    Parameters
+    ----------
+    date : str
+        String containing date in yyyy-mm-dd format
+
+    Returns
+    -------
+    bool
+        True if valid, False otherwise
+    '''
+
+    DATE_FORMAT = '%Y-%m-%d'
+
+    if not isinstance(date, str):
+        return False
+    
+    try:
+        datetime.datetime.strptime(date, DATE_FORMAT)
+    except Exception:
+        return False
+    else:
+        return True
