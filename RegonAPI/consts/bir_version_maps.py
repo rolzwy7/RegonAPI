@@ -91,10 +91,11 @@ DANE_POBIERZ_RAPORT_ZBIORCZY_REPORT_NAMES = [
     {"bir1.1": "BIR11SkreslonePodmiotyPrawneOrazDzialalnosciOsFizycznych"},
     {"bir1.1": "BIR11NoweJednostkiLokalne"},
     {"bir1.1": "BIR11AktualizowaneJednostkiLokalne"},
-    {"bir1.1": "BIR11SkresloneJednostkiLokalne"}
+    {"bir1.1": "BIR11SkresloneJednostkiLokalne"},
 ]
 
 REPORTS = {
     "bir1": [x["bir1"] for x in DANE_POBIERZ_PELNY_RAPORT_REPORT_NAMES],
-    "bir1.1": [x["bir1.1"] for x in DANE_POBIERZ_PELNY_RAPORT_REPORT_NAMES] + [x["bir1.1"] for x in DANE_POBIERZ_RAPORT_ZBIORCZY_REPORT_NAMES],
+    "bir1.1": [x["bir1.1"] for x in DANE_POBIERZ_PELNY_RAPORT_REPORT_NAMES]
+    + [x["bir1.1"] for x in DANE_POBIERZ_RAPORT_ZBIORCZY_REPORT_NAMES],
 }

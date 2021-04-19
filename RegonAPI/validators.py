@@ -131,8 +131,9 @@ def is_valid_regon14(regon14):
     regon13 = regon14[:13]
     return converters.regon13_to_14(regon13) == regon14
 
+
 def is_valid_date(date):
-    '''Date string format validation
+    """Date string format validation
 
     Parameters
     ----------
@@ -143,11 +144,11 @@ def is_valid_date(date):
     -------
     bool
         True if valid, False otherwise
-    '''
+    """
 
     if not isinstance(date, str):
         return False
-    
+
     try:
         datetime.datetime.strptime(date, settings.DATE_FORMAT)
     except Exception:

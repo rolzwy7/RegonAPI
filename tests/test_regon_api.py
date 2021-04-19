@@ -7,18 +7,17 @@ from RegonAPI.exceptions import ApiInvalidBIRVersionProvided
 from RegonAPI.exceptions import ApiAuthenticationError
 from RegonAPI.settings import BIR_VERSIONS
 
-testing = {
-    "SID": "3xg5b1m7nuoeye55h667",
-    "KEY": "abcde12345abcde12345"
-}
+testing = {"SID": "3xg5b1m7nuoeye55h667", "KEY": "abcde12345abcde12345"}
 
 
 @pytest.fixture
-@mock.patch('RegonAPI.regon_api.Client', autospec=True)
+@mock.patch("RegonAPI.regon_api.Client", autospec=True)
 def api_mock(mockClient):
     """ Creates api object with mocked client """
+
     def fin():
         pass
+
     api = RegonAPI()
     return api
 
@@ -29,61 +28,56 @@ def test_regon_api_Prerequisites():
 
 
 def test_get_last_code_CorrectResponse_ReturnTypeCorrect(api_mock):
-    api_mock.service.GetValue.return_value = '4'
+    api_mock.service.GetValue.return_value = "4"
     code, msg = api_mock.get_last_code()
     api_mock.service.GetValue.assert_called_once()
-    api_mock.service.GetValue.assert_called_with(
-        pNazwaParametru='KomunikatKod')
-    assert code == '4'
+    api_mock.service.GetValue.assert_called_with(pNazwaParametru="KomunikatKod")
+    assert code == "4"
     assert isinstance(msg, str) or isinstance(msg, dict)
 
 
 def test_get_last_IncorrectResponse_ExceptionRaised(api_mock):
     api_mock.service.GetValue.reset_mock()
     try:
-        api_mock.service.GetValue.return_value = 'testing'
+        api_mock.service.GetValue.return_value = "testing"
         code, msg = api_mock.get_last_code()
         assert False
     except ApiCodeTranslationError as e:
         assert True
         api_mock.service.GetValue.assert_called_once()
-        api_mock.service.GetValue.assert_called_with(
-            pNazwaParametru='KomunikatKod')
+        api_mock.service.GetValue.assert_called_with(pNazwaParametru="KomunikatKod")
     except Exception:
         assert False
 
 
 def test_get_data_status_CorrectResponse_ReturnTypeCorrect(api_mock):
-    api_mock.service.GetValue.return_value = '2000-10-10'
+    api_mock.service.GetValue.return_value = "2000-10-10"
     response = api_mock.get_data_status()
     api_mock.service.GetValue.assert_called_once()
-    api_mock.service.GetValue.assert_called_with(
-        pNazwaParametru='StanDanych')
+    api_mock.service.GetValue.assert_called_with(pNazwaParametru="StanDanych")
     assert isinstance(response, str)
-    assert response == '2000-10-10'
+    assert response == "2000-10-10"
 
 
 def test_get_service_status_CorrectResponse_ReturnTypeCorrect(api_mock):
-    api_mock.service.GetValue.return_value = '1'
+    api_mock.service.GetValue.return_value = "1"
     code, msg = api_mock.get_service_status()
     api_mock.service.GetValue.assert_called_once()
-    api_mock.service.GetValue.assert_called_with(
-        pNazwaParametru='StatusUslugi')
-    assert code == '1'
+    api_mock.service.GetValue.assert_called_with(pNazwaParametru="StatusUslugi")
+    assert code == "1"
     assert isinstance(msg, str) or isinstance(msg, dict)
 
 
 def test_get_service_status_IncorrectResponse_ExceptionRaised(api_mock):
     api_mock.service.GetValue.reset_mock()
     try:
-        api_mock.service.GetValue.return_value = 'testing'
+        api_mock.service.GetValue.return_value = "testing"
         code, msg = api_mock.get_service_status()
         assert False
     except ApiCodeTranslationError as e:
         assert True
         api_mock.service.GetValue.assert_called_once()
-        api_mock.service.GetValue.assert_called_with(
-            pNazwaParametru='StatusUslugi')
+        api_mock.service.GetValue.assert_called_with(pNazwaParametru="StatusUslugi")
 
 
 def test_get_operations_OwnOperations_NoProblemsExpected(api_mock):
@@ -107,13 +101,12 @@ def test_get_operations_NoOperatoions_ExceptionRaised(api_mock):
         assert False
 
 
-@mock.patch('RegonAPI.regon_api.Client')
-@mock.patch('RegonAPI.regon_api.Session')
-@mock.patch('RegonAPI.regon_api.RegonAPI._check_session')
-@mock.patch('RegonAPI.regon_api.RegonAPI._create_service')
+@mock.patch("RegonAPI.regon_api.Client")
+@mock.patch("RegonAPI.regon_api.Session")
+@mock.patch("RegonAPI.regon_api.RegonAPI._check_session")
+@mock.patch("RegonAPI.regon_api.RegonAPI._create_service")
 def test_regon_api_auth_success(
-    mocked_create_service, mocked_check_session,
-    mocked_Session, mocked_Client, api_mock
+    mocked_create_service, mocked_check_session, mocked_Session, mocked_Client, api_mock
 ):
     api_mock.service.Zaloguj.return_value = testing["SID"]
     mocked_check_session.return_value = True
@@ -136,15 +129,14 @@ def test_regon_api_auth_success(
     assert returned == testing["SID"]
 
 
-@mock.patch('RegonAPI.regon_api.Client')
-@mock.patch('RegonAPI.regon_api.Session')
-@mock.patch('RegonAPI.regon_api.RegonAPI._check_session')
-@mock.patch('RegonAPI.regon_api.RegonAPI._create_service')
+@mock.patch("RegonAPI.regon_api.Client")
+@mock.patch("RegonAPI.regon_api.Session")
+@mock.patch("RegonAPI.regon_api.RegonAPI._check_session")
+@mock.patch("RegonAPI.regon_api.RegonAPI._create_service")
 def test_regon_api_auth_failure(
-    mocked_create_service, mocked_check_session, mocked_Client,
-    mocked_Session, api_mock
+    mocked_create_service, mocked_check_session, mocked_Client, mocked_Session, api_mock
 ):
-    api_mock.service.Zaloguj.return_value = 'testing'
+    api_mock.service.Zaloguj.return_value = "testing"
     mocked_check_session.return_value = False
     try:
         api_mock.authenticate(testing["KEY"], verify=True)
@@ -154,17 +146,16 @@ def test_regon_api_auth_failure(
 
 
 def test_CorrectInit_NoProblemsExpected(api_mock):
-    api_mock.service.GetValue.return_value = '2000-10-10'
+    api_mock.service.GetValue.return_value = "2000-10-10"
     try:
         str_ = str(api_mock)
         assert True
     except Exception as e:
         assert False
     assert isinstance(str_, str)
-    assert str_ != ''
+    assert str_ != ""
     api_mock.service.GetValue.assert_called_once()
-    api_mock.service.GetValue.assert_called_with(
-        pNazwaParametru='StanDanych')
+    api_mock.service.GetValue.assert_called_with(pNazwaParametru="StanDanych")
 
 
 def test_CorrectParamsProvided_NoProblemsExpected(api_mock):
@@ -172,7 +163,7 @@ def test_CorrectParamsProvided_NoProblemsExpected(api_mock):
     assert isinstance(api_mock.service_namespace, str)
     # attr bir_version
     assert isinstance(api_mock.bir_version, str)
-    assert(api_mock.bir_version in BIR_VERSIONS)
+    assert api_mock.bir_version in BIR_VERSIONS
     # attr wsdl
     assert isinstance(api_mock.wsdl, str)
     # attr service_url
@@ -184,8 +175,7 @@ def test_CorrectParamsProvided_NoProblemsExpected(api_mock):
 
     api_mock.client.create_service.assert_called_once()
     api_mock.client.create_service.assert_called_once_with(
-        api_mock.service_namespace,
-        api_mock.service_url
+        api_mock.service_namespace, api_mock.service_url
     )
 
 

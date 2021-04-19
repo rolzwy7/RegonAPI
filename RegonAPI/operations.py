@@ -153,7 +153,7 @@ class RegonAPIOperations(object):
         return parse_xml_response(response) if response else None
 
     def dataDownloadFullGroupReport(self, report_date, report_name, strict=True):
-        '''
+        """
         DanePobierzRaportZbiorczy wrapper
 
         Parameters
@@ -178,7 +178,7 @@ class RegonAPIOperations(object):
             If strict=True and provided report name is not included in
             predefined list of valid report names or report date is in
             invalid format
-        '''
+        """
         if strict is True:
             if report_name not in self.reports:
                 raise ApiUnknownReportNameError(report_name)
@@ -188,7 +188,7 @@ class RegonAPIOperations(object):
         request_data = {"pDataRaportu": report_date, "pNazwaRaportu": report_name}
         wsdl_method = getattr(
             self.service,
-            OPERATIONS["alias_data_download_full_group_report"][self.bir_version]
+            OPERATIONS["alias_data_download_full_group_report"][self.bir_version],
         )
         response = wsdl_method(**request_data)
         return parse_xml_response(response) if response else None

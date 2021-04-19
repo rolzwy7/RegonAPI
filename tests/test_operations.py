@@ -28,21 +28,23 @@ testing = {
                         "regons9": "testing",
                         "regons14": "testing",
                         "krss": "testing",
-                        "nips": "testing"
+                        "nips": "testing",
                     },
-                ]
+                ],
             }
         }
-    }
+    },
 }
 
 
 @pytest.fixture
-@mock.patch('RegonAPI.regon_api.Client', autospec=True)
+@mock.patch("RegonAPI.regon_api.Client", autospec=True)
 def api_mock(mockClient):
     """ Creates api object with mocked client """
+
     def fin():
         pass
+
     api = RegonAPI()
     return api
 
@@ -56,10 +58,9 @@ def test_operations_Prerequisites():
     assert testing["REGON14"] is not None
 
 
-@mock.patch('RegonAPI.operations.parse_xml_response')
+@mock.patch("RegonAPI.operations.parse_xml_response")
 def test_dataDownloadFullReport_method__valid_calls(
-    mocked_parse_xml_response,
-    api_mock
+    mocked_parse_xml_response, api_mock
 ):
     mocked_parse_xml_response.return_value = "testing"
 
@@ -73,10 +74,9 @@ def test_dataDownloadFullReport_method__valid_calls(
     assert api_mock.service.DanePobierzPelnyRaport.call_count == calls_made
 
 
-@mock.patch('RegonAPI.operations.parse_xml_response')
+@mock.patch("RegonAPI.operations.parse_xml_response")
 def test_dataDownloadFullReport_method__invalid_report_name(
-    mocked_parse_xml_response,
-    api_mock
+    mocked_parse_xml_response, api_mock
 ):
     mocked_parse_xml_response.return_value = "testing"
 
@@ -87,7 +87,7 @@ def test_dataDownloadFullReport_method__invalid_report_name(
         assert True
 
 
-@mock.patch('RegonAPI.operations.parse_xml_response')
+@mock.patch("RegonAPI.operations.parse_xml_response")
 def test_searchData_method__valid_calls(mocked_parse_xml_response, api_mock):
     mocked_parse_xml_response.return_value = "testing"
 
@@ -100,7 +100,7 @@ def test_searchData_method__valid_calls(mocked_parse_xml_response, api_mock):
     api_mock.service.DaneSzukaj.call_count == calls_made
 
 
-@mock.patch('RegonAPI.operations.parse_xml_response')
+@mock.patch("RegonAPI.operations.parse_xml_response")
 def test_searchData_method__invalid_calls(mocked_parse_xml_response, api_mock):
     mocked_parse_xml_response.return_value = "testing"
 
@@ -114,28 +114,34 @@ def test_searchData_method__invalid_calls(mocked_parse_xml_response, api_mock):
         except Exception as e:
             assert True
 
-@mock.patch('RegonAPI.operations.parse_xml_response')
+
+@mock.patch("RegonAPI.operations.parse_xml_response")
 def test_dataDownloadFullGroupReport_method__valid_calls(
-    mocked_parse_xml_response,
-    api_mock
+    mocked_parse_xml_response, api_mock
 ):
     mocked_parse_xml_response.return_value = "testing"
 
     calls_made = len(api_mock.reports)
 
     for report in api_mock.reports:
-        assert api_mock.dataDownloadFullGroupReport(report_date='2020-04-16', report_name=report) == "testing"
+        assert (
+            api_mock.dataDownloadFullGroupReport(
+                report_date="2020-04-16", report_name=report
+            )
+            == "testing"
+        )
 
     assert mocked_parse_xml_response.call_count == calls_made
     assert api_mock.service.DanePobierzRaportZbiorczy.call_count == calls_made
 
-@mock.patch('RegonAPI.operations.parse_xml_response')
-def test_dataDownloadFullGroupReport_method__invalid_report_name(mocked_parse_xml_response, api_mock):
+
+@mock.patch("RegonAPI.operations.parse_xml_response")
+def test_dataDownloadFullGroupReport_method__invalid_report_name(
+    mocked_parse_xml_response, api_mock
+):
     mocked_parse_xml_response.return_value = "testing"
 
     with pytest.raises(ApiUnknownReportNameError):
         api_mock.dataDownloadFullGroupReport(
-            report_date='2021-04-16',
-            report_name='test'
+            report_date="2021-04-16", report_name="test"
         )
-

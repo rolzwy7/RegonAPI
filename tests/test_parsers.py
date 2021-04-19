@@ -35,8 +35,8 @@ testing = {
                 None,
                 0,
                 123,
-                "testing123"
-            ]
+                "testing123",
+            ],
         }
     }
 }

@@ -155,8 +155,8 @@ Result of the above code
 All report names used by function <i>dataDownloadFullReport</i> are listed <a href="https://github.com/rolzwy7/RegonAPI/wiki/Report-names">here</a> or in API documentation.
 
 ### API documentation
-- [BIR Version 1.1 Documentation](https://api.stat.gov.pl/Content/files/regon/GUS-Regon-UslugaBIR11-dokumentacja_v1.02.zip)
-- [BIR Version 1 Documentation](https://api.stat.gov.pl/Content/files/regon/regon_-_instrukcja_techniczna_bir1_dla_podmiotow_komercyjnych_v019.zip)
+- [BIR Version 1.1 Documentation](https://api.stat.gov.pl/Home/RegonApi)
+- [BIR Version 1 Documentation](https://api.stat.gov.pl/Home/RegonApi)
 
 ### Tests
 All tests can be performed by executing this command

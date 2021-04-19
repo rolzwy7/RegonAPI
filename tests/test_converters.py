@@ -5,10 +5,10 @@ from RegonAPI.converters import regon13_to_14
 from RegonAPI.converters import regon8_to_9
 
 testing = {
-    "REGON13": '1234567851234',
-    "REGON14": '12345678512347',
-    "REGON8": '49270733',
-    "REGON9": '492707333'
+    "REGON13": "1234567851234",
+    "REGON14": "12345678512347",
+    "REGON8": "49270733",
+    "REGON9": "492707333",
 }
 
 
