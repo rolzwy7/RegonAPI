@@ -1,3 +1,5 @@
+from RegonAPI.settings import DATE_FORMAT
+
 class ApiError(BaseException):
     def __str__(self):
         return repr(self.data)
@@ -22,4 +24,10 @@ class ApiInvalidBIRVersionProvided(ApiError):
     def __init__(self, data, choices):
         self.data = "Invailid BIR version: {data} not in {choices}".format(
             data=data, choices=choices
+        )
+
+class ApiInvalidDateFormat(ApiError):
+    def __init__(self, data):
+        self.data = "Invalid date format given: '{data}'. Should be in '{correct_format}' format".format(
+            data=data, correct_format=DATE_FORMAT
         )

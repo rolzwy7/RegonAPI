@@ -5,12 +5,36 @@ from RegonAPI.validators import is_valid_regon8
 from RegonAPI.validators import is_valid_regon9
 from RegonAPI.validators import is_valid_regon13
 from RegonAPI.validators import is_valid_regon14
+from RegonAPI.validators import is_valid_date
 
 testing = {
     "REGON9": "492707333",
     "REGON14": "12345678512347"
 }
 
+@pytest.fixture
+def valid_dates():
+    return [
+        '2021-04-16',
+        '2020-01-01',
+        '2021-1-1',
+        '2021-4-16'
+    ]
+
+@pytest.fixture
+def invalid_dates():
+    return [
+        None,
+        1234,
+        False,
+        True,
+        ('2021-04-16', '2020-01-01'),
+        ['2021-04-16', '2020-01-01'],
+        12.45,
+        2021,
+        '20011-111-444',
+        '01-01-02'
+    ]
 
 @pytest.mark.first
 def test_validators_Prerequisites():
@@ -76,3 +100,11 @@ def test_re_is_digit_string_function__invalid_calls():
         assert False
     except Exception as e:
         assert True
+
+def test_is_date_valid(valid_dates):
+    for date in valid_dates:
+        assert is_valid_date(date) is True
+
+def test_is_date_invalid(invalid_dates):
+    for date in invalid_dates:
+        assert is_valid_date(date) is False
