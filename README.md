@@ -125,6 +125,26 @@ for report_name in REPORTS:
     result = api.dataDownloadFullReport(CD_PROJEKT_REGON9, report_name)
     print("\n[*] Report:\n", report_name)
     pprint(result)
+
+# Group reports
+
+GROUP_REPORTS = [
+    "BIR11NowePodmiotyPrawneOrazDzialalnosciOsFizycznych",
+    "BIR11AktualizowanePodmiotyPrawneOrazDzialalnosciOsFizycznych",
+    "BIR11SkreslonePodmiotyPrawneOrazDzialalnosciOsFizycznych",
+    "BIR11NoweJednostkiLokalne",
+    "BIR11AktualizowaneJednostkiLokalne",
+    "BIR11SkresloneJednostkiLokalne",
+]
+
+# It's better to fetch group reports using your own API key
+print("\n[!] It's better to fetch group reports using your own API key")
+exit(0)
+
+for group_report_name in GROUP_REPORTS:
+    result = api.dataDownloadFullGroupReport("2021-04-16", group_report_name)
+    print("\n[*] Group Report:\n", group_report_name)
+    pprint(result)
 ```
 
 Result of the above code
