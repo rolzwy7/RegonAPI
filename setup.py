@@ -25,7 +25,7 @@ setuptools.setup(
         "Environment :: Console",
     ],
     install_requires=[
-        "zeep >= 3.3,<3.4",
-        "beautifulsoup4 >= 4.7,<4.8",
+        "zeep >= 3.3,<4.3",
+        "beautifulsoup4 >= 4.7,<4.13",
     ],
 )
