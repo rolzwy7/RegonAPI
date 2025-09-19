@@ -46,7 +46,7 @@
 
 
 ### Features
-- Supports **BIR v1** and **BIR v1.1**
+- Supports **BIR v1**, **BIR v1.1** and **BIR v1.2**
 - Searching for information about business entities by:
   - **KRS** number/s
   - **NIP** number/s
@@ -175,6 +175,7 @@ Result of the above code
 All report names used by function <i>dataDownloadFullReport</i> are listed <a href="https://github.com/rolzwy7/RegonAPI/wiki/Report-names">here</a> or in API documentation.
 
 ### API documentation
+- [BIR Version 1.2 Documentation](https://api.stat.gov.pl/Home/RegonApi)
 - [BIR Version 1.1 Documentation](https://api.stat.gov.pl/Home/RegonApi)
 - [BIR Version 1 Documentation](https://api.stat.gov.pl/Home/RegonApi)
 
