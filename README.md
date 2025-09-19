@@ -46,7 +46,7 @@
 
 
 ### Features
-- Supports **BIR v1** and **BIR v1.1**
+- Supports **BIR v1**, **BIR v1.1** and **BIR v1.2**
 - Searching for information about business entities by:
   - **KRS** number/s
   - **NIP** number/s
@@ -73,22 +73,22 @@ from RegonAPI.exceptions import ApiAuthenticationError
 
 # Available reports
 REPORTS = [
-    "BIR11OsFizycznaDaneOgolne",
-    "BIR11OsFizycznaDzialalnoscCeidg",
-    "BIR11OsFizycznaDzialalnoscRolnicza",
-    "BIR11OsFizycznaDzialalnoscPozostala",
-    "BIR11OsFizycznaDzialalnoscSkreslonaDo20141108",
-    "BIR11OsFizycznaPkd",
-    "BIR11OsFizycznaListaJednLokalnych",
-    "BIR11JednLokalnaOsFizycznej",
-    "BIR11JednLokalnaOsFizycznejPkd",
-    "BIR11OsPrawna",
-    "BIR11OsPrawnaPkd",
-    "BIR11OsPrawnaListaJednLokalnych",
-    "BIR11JednLokalnaOsPrawnej",
-    "BIR11JednLokalnaOsPrawnejPkd",
-    "BIR11OsPrawnaSpCywilnaWspolnicy",
-    "BIR11TypPodmiotu",
+    "BIR12OsFizycznaDaneOgolne",
+    "BIR12OsFizycznaDzialalnoscCeidg",
+    "BIR12OsFizycznaDzialalnoscRolnicza",
+    "BIR12OsFizycznaDzialalnoscPozostala",
+    "BIR12OsFizycznaDzialalnoscSkreslonaDo20141108",
+    "BIR12OsFizycznaPkd",
+    "BIR12OsFizycznaListaJednLokalnych",
+    "BIR12JednLokalnaOsFizycznej",
+    "BIR12JednLokalnaOsFizycznejPkd",
+    "BIR12OsPrawna",
+    "BIR12OsPrawnaPkd",
+    "BIR12OsPrawnaListaJednLokalnych",
+    "BIR12JednLokalnaOsPrawnej",
+    "BIR12JednLokalnaOsPrawnejPkd",
+    "BIR12OsPrawnaSpCywilnaWspolnicy",
+    "BIR12TypPodmiotu",
 ]
 
 TEST_API_KEY = "abcde12345abcde12345"
@@ -98,7 +98,7 @@ CD_PROJEKT_REGON9 = "492707333"
 
 # Authentication
 api = RegonAPI(
-    bir_version="bir1.1", is_production=False, timeout=10, operation_timeout=10
+    bir_version="bir1.2", is_production=False, timeout=10, operation_timeout=10
 )
 try:
     api.authenticate(key=TEST_API_KEY)
@@ -175,6 +175,7 @@ Result of the above code
 All report names used by function <i>dataDownloadFullReport</i> are listed <a href="https://github.com/rolzwy7/RegonAPI/wiki/Report-names">here</a> or in API documentation.
 
 ### API documentation
+- [BIR Version 1.2 Documentation](https://api.stat.gov.pl/Home/RegonApi)
 - [BIR Version 1.1 Documentation](https://api.stat.gov.pl/Home/RegonApi)
 - [BIR Version 1 Documentation](https://api.stat.gov.pl/Home/RegonApi)
 

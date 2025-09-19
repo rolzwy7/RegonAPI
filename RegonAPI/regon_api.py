@@ -70,7 +70,7 @@ class RegonAPI(RegonAPIOperations):
 
     def __init__(
         self,
-        bir_version="bir1.1",
+        bir_version="bir1.2",
         is_production=False,
         service_namespace="{http://tempuri.org/}e3",
         timeout=10,

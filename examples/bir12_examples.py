@@ -1,13 +1,3 @@
-### Installation
-
-```
-pip install RegonAPI
-```
-
-### Example
-All usage examples are available in [examples](https://github.com/rolzwy7/RegonAPI/tree/master/examples) directory
-
-```python
 from pprint import pprint
 
 from RegonAPI import RegonAPI
@@ -87,28 +77,3 @@ for group_report_name in GROUP_REPORTS:
     result = api.dataDownloadFullGroupReport("2021-04-16", group_report_name)
     print("\n[*] Group Report:\n", group_report_name)
     pprint(result)
-```
-
-Result of the above code
-
-```
-  ... truncated ...
-[{'praw_adSiedzGmina_Nazwa': 'Praga-Północ',
-  'praw_adSiedzGmina_Symbol': '088',
-  'praw_adSiedzKodPocztowy': '03301',
-  'praw_adSiedzKraj_Nazwa': 'POLSKA',
-  'praw_adSiedzKraj_Symbol': 'PL',
-  'praw_adSiedzMiejscowoscPoczty_Nazwa': 'Warszawa',
-  'praw_adSiedzMiejscowoscPoczty_Symbol': '0919298',
-  'praw_adSiedzMiejscowosc_Nazwa': 'Warszawa',
-  'praw_adSiedzMiejscowosc_Symbol': '0919298',
-  ... truncated ...
-  'praw_formaFinansowania_Symbol': '1',
-  'praw_formaWlasnosci_Nazwa': 'WŁASNOŚĆ PRYWATNA KRAJOWA POZOSTAŁA',
-  'praw_formaWlasnosci_Symbol': '215',
-  'praw_jednostekLokalnych': '0',
-  'praw_nazwa': 'CD PROJEKT SPÓŁKA AKCYJNA',
-  'praw_nazwaSkrocona': 'CD PROJEKT S.A.',
-  'praw_nip': '7342867148',
-  ... truncated ...
-```
